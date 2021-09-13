@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chasewater</title>
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/gsap.js"></script>
+    <script src="assets/js/idle.js"></script>
+    <link rel="stylesheet" href="assets/css/tailwind.css" />
+    <link rel="stylesheet" href="assets/css/global.css" />
+
+    <style>
+        @font-face {
+            font-family: "Baufra W01 Regular";
+            src: url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.eot");
+            /* IE9*/
+            src: url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.woff2") format("woff2"), /* chrome、firefox */
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.woff") format("woff"), /* chrome、firefox */
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.svg#Baufra W01 Regular") format("svg");
+            /* iOS 4.1- */
+        }
+        
+        @font-face {
+            font-family: "Baufra W01 Bold";
+            src: url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.eot");
+            /* IE9*/
+            src: url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.woff2") format("woff2"), /* chrome、firefox */
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.woff") format("woff"), /* chrome、firefox */
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.svg#Baufra W01 Bold") format("svg");
+            /* iOS 4.1- */
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app" class="relative pageConservation">
+        <div class="backImage" style="background-image: url('assets/img/scene1.png'); background-color: #cce8f5; background-position: bottom center;"></div>
+        <a class="backButton" href="wildlife.html"></a>
+        <a href="menu.html" class="homeButton"></a>
+        <div class="w-1/3 infoBox leftAlign bg-secondary">
+            <h1 class="text-6xl mb-10 bold uppercase text-white">CONSERVATION</h1>
+            <p class="text-white">The diverse range of habitats at Chasewater all need to be managed to maintain the flora and fauna that depend on them. Our rangers, estate workers, environmental specialists and volunteers work hard to preserve these habitats for future generations.</p>
+            <br>
+
+            <p style="color: #D5A400;">Tap a hotspot to learn more…</p>
+        </div>
+        <button v-for="(item, i) in conservation" @click="popups.conservation = true; selectedConservation = i" style="width: max-content" class="absolute text-primary bg-white rounded-full mr-20 py-1 pl-2 pr-3 align-middle" :style="{ top: item.position[0]  + 'px', left: item.position[1] + 'px' }">
+            <img class="inline-block rounded-full h-16 w-16 align-middle" :src="item.image">
+            <span class="leading-tight inline-block align-middle">{{item.title}}</span>
+            <i class="ml-2 chevron-right chevron-right--primary align-middle"></i>
+        </button>
+        <!-- POP UP -->
+        <transition name="zoom">
+            <div v-if="popups.conservation" class="popUp borderBottom bg-white text-black">
+                <button class="closeButton" @click="popups.conservation=false"></button>
+                <div class="px-32 py-20 w-1/2">
+                    <h4 class="text-primary bold">{{conservation[selectedConservation].preTitle}}</h4>
+                    <h1 class="text-primary text-7xl mb-20 bold">{{conservation[selectedConservation].title}}</h1>
+                    <p v-html="conservation[selectedConservation].content"></p>
+                </div>
+                <div class="maskImage" :style="{ 'background-image': 'url(' + conservation[selectedConservation].image + ')' }">
+                </div>
+            </div>
+        </transition>
+    </div>
+    </div>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
+<style>
+    .popUp {
+        position: absolute;
+        top: 50px;
+        right: 50px;
+        width: calc(100% - 100px);
+        z-index: 100;
+        height: calc(100% - 100px);
+    }
+</style>

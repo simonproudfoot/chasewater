@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chasewater</title>
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/gsap.js"></script>
+    <script src="assets/js/idle.js"></script>
+    <link rel="stylesheet" href="assets/css/tailwind.css" />
+    <link rel="stylesheet" href="assets/css/global.css" />
+
+    <style>
+        @font-face {
+            font-family: "Baufra W01 Regular";
+            src: url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.eot");
+            /* IE9*/
+            src: url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.woff2") format("woff2"), /* chrome、firefox */
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.woff") format("woff"), /* chrome、firefox */
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.svg#Baufra W01 Regular") format("svg");
+            /* iOS 4.1- */
+        }
+        
+        @font-face {
+            font-family: "Baufra W01 Bold";
+            src: url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.eot");
+            /* IE9*/
+            src: url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.woff2") format("woff2"), /* chrome、firefox */
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.woff") format("woff"), /* chrome、firefox */
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.svg#Baufra W01 Bold") format("svg");
+            /* iOS 4.1- */
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app" class="relative pageSitemanagement" style="background-color: #cce8f5">
+        <div v-show="quizActive" class="backButton" @click="runQuiz()"></div>
+        <div class="backImage sceneryAnim" style="background-image: url('assets/img/management-background.svg'); background-position: bottom left; width: 100%"></div>
+        <a href="menu.html" class="homeButton"></a>
+        <img src="assets/img/character.svg" class="character">
+        <div v-if="!quizActive" class="speechBox absolute top-44 right-32 w-1/4">
+            <div class="px-10 pt-10 bg-white pb-5 bold text-primary text-center">Tap an icon to see some tips for looking out for the landscape and each other:</div>
+
+            <div class="block px-8 bg-white" style="border-bottom: 10px #d19100 solid ;">
+                <ul>
+                    <li v-for="(item, i) in management" class="inline-block px-5 py-3" :class="managementSelected == i ? 'outlineIcon' : null">
+                        <img :src="item.icon" class="w-16 h-16" @click="managementSelected = i">
+                    </li>
+                </ul>
+            </div>
+            <transition name="bounce" mode="out-in">
+                <div v-if="managementSelected != null" class="px-10 py-10 bg-white">
+                    <p class="text-center">{{management[managementSelected].text}}</p>
+                </div>
+            </transition>
+        </div>
+        <div v-if="!quizActive" class="w-1/3 infoBox leftAlign bg-secondary">
+            <h1 class="text-6xl mb-10 bold uppercase text-white">SITE MANAGEMENT</h1>
+            <p class="text-white">Chasewater Country Park has to be actively managed to help the flora and fauna to thrive. Our staff manage each habitat differently, according to its needs. For example, they work hard to clear birch and bracken on the heathland to retain
+                an open habitat.</p>
+            <br>
+            <br>
+            <button class="text-primary bg-white rounded-full mr-20 py-1 pl-5 pr-6 align-middle" @click="runQuiz(true)">
+                <span class="ml-3 mr-2 inline-block align-middle">Take the Chasewater <br> Country Park Quiz</span>
+                <span class="chevron-right chevron-right--primary"></span>
+            </button>
+        </div>
+        <div v-else class="w-1/3 infoBox text-center bg-white leftAlign">
+            <div v-if="!quizFinished && quiz[activeQuestion] != undefined" class="px-20">
+                <img :src="quiz[activeQuestion].image" class="rounded-full block h-32 w-32 mx-auto">
+                <p class="text-secondary bold text-center mt-10">{{quiz[activeQuestion].question}}</p>
+                <small class="text-center">test: all answers are A</small>
+                <br>
+                <br>
+                <button v-for="(item, i) in quiz[activeQuestion].options" :class="quiz[activeQuestion].answer == item ? 'bg-primary' : 'bg-secondary'" class="text-left bg-secondary text-white w-full rounded-full py-2 px-2 mb-2" @click="answerQ(item)">
+                    <span class="bg-white text-secondary rounded-full h-12 w-12 align-middle inline-block py-2 bold text-center">{{alphabet[i]}}</span>
+                    <span class=" ml-10 w-1/2 inline-block align-middle text-center leading-tight">{{item}}</span>
+                </button>
+            </div>
+            <div v-else class="px-20">
+                <h1 v-if="quizResult == quiz.length" class="text-secondary bold text-center mt-10 text-5xl">WELL DONE!!!</h1>
+                <p class="text-3xl mt-10">
+                    You scored {{quizResult}} out of {{quiz.length}}!
+                </p>
+                <button class="relative rounded-full bg-primary w-full py-5 px-5 text-center block bg-secondary text-white my-5" @click="runQuiz(false)">
+                    GO BACK
+                </button>
+
+                <button class="relative rounded-full bg-primary w-full py-5 px-5 block text-center bg-secondary text-white" @click="resetQuiz()">
+                    TRY AGAIN
+                </button>
+            </div>
+        </div>
+        <transition name="bounce" mode="out-in">
+            <div v-if="quizActive && quiz[activeQuestion] != undefined" class="quiz selectorButtons absolute bottom-20 leftAlign z-30 ">
+                <span style="width: 90%; height: 10px; " class="top-0 bottom-0 my-auto bg-white block absolute "></span>
+                <button v-for="(item, i) in quiz" :class="i===activeQuestion ? 'bg-primary text-white' : 'bg-white text-primary' " class="relative rounded-full mr-10 py-1 pl-2 pr-5 align-middle ">
+                <img :src="item.image " class="inline-block rounded-full h-16 w-16 ">
+                <span class="ml-6 mr-10 text ">Question {{i+1}}</span>
+            </button>
+            </div>
+        </transition>
+
+    </div>
+    </div>
+    </div>
+    <script src="assets/js/app.js "></script>
+</body>
+
+</html>
+<style>
+    .character {
+        position: absolute;
+        bottom: -600px;
+        left: 750px;
+    }
+</style>

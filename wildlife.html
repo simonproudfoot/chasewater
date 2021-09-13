@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chasewater</title>
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/gsap.js"></script>
+    <script src="assets/js/idle.js"></script>
+    <link rel="stylesheet" href="assets/css/tailwind.css" />
+    <link rel="stylesheet" href="assets/css/global.css" />
+
+    <style>
+        @font-face {
+            font-family: "Baufra W01 Regular";
+            src: url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.eot");
+            /* IE9*/
+            src: url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.woff2") format("woff2"), /* chrome、firefox */
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.woff") format("woff"), /* chrome、firefox */
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.svg#Baufra W01 Regular") format("svg");
+            /* iOS 4.1- */
+        }
+        
+        @font-face {
+            font-family: "Baufra W01 Bold";
+            src: url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.eot");
+            /* IE9*/
+            src: url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.woff2") format("woff2"), /* chrome、firefox */
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.woff") format("woff"), /* chrome、firefox */
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.svg#Baufra W01 Bold") format("svg");
+            /* iOS 4.1- */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="relative seaBack">
+        <a href="menu.html" class="homeButton"></a>
+        <div class="bg-secondary w-2/6 infoBox">
+            <h1 class="text-white text-8xl mb-10 bold">WILDLIFE</h1>
+            <p class="text-white">Chasewater Country Park boasts a diverse range of habitats, which merge into each other and provide a vast array of wildlife. Choose from the options below to find out more.</p>
+            <br>
+            <p style="color: #D5A400;">Choose from the options to find out more.</p>
+        </div>
+        <div class="maskImage">
+        </div>
+        <div class="w-2/6 absolute right-20 z-10 mt-20 top-20">
+            <a href="species.html" class="button button--lg bg-white text-primary text-5xl mb-10 relative" style="width: 100%;"><img src="assets/img/deer.png" class="absolute rounded-full h-24 w-24 left-5 top-0 bottom-0 my-auto"> Species <i class="ml-2 chevron-right--lg chevron-right chevron-right--primary absolute right-10"></i>
+            </a>
+            <a href="habitats.html" class="button button--lg bg-white text-primary text-5xl mb-10 relative" style="width: 100%;"><img src="assets/img/habitat.png" class="absolute rounded-full h-24 w-24 left-5 top-0 bottom-0 my-auto"> Habitats <i class="ml-2 chevron-right--lg chevron-right chevron-right--primary absolute right-10"></i>
+            </a>
+            <a href="conservation.html" class="button button--lg bg-white text-primary text-5xl relative" style="width: 100%;"><img src="assets/img/conservation.png" class="absolute rounded-full h-24 w-24 left-5 top-0 bottom-0 my-auto"> Conservation <i class="ml-2 chevron-right--lg chevron-right chevron-right--primary absolute right-10"></i>
+            </a>
+        </div>
+    </div>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
+<style>
+    .infoBox {
+        position: absolute;
+        top: 0;
+        left: 100px;
+        padding: 150px 50px;
+        border-bottom: 28px solid #D5A400;
+    }
+    
+    .maskImage {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        z-index: 1;
+        background-color: #000;
+        background-image: url('assets/img/lake.png');
+        clip-path: circle(93% at 100% 50%);
+    }
+    
+    .map {
+        top: -12px;
+        left: 0px;
+        width: 1923px;
+        height: 695px;
+    }
+</style>

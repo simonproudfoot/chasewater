@@ -1,0 +1,259 @@
+#app {
+    font-family: "Baufra W01 Regular";
+    width: 1920px;
+    height: 1080px;
+    background-color: black;
+    font-size: 20px;
+    overflow: hidden;
+}
+
+h1 {
+    font-family: "Baufra W01 Regular"
+}
+
+.fullScreenVideo{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.bold, strong {
+    font-family: "Baufra W01 Bold";
+}
+
+.seaBack {
+    background-image: url('../img/seaback.png');
+}
+
+.backImage {
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.outlineIcon{
+    position: relative;
+}
+
+.outlineIcon::before {
+    content: "";
+    position: absolute;
+    width: 74px;
+    height: 74px;
+    display: block;
+    border: 2px #d19100 solid;
+    border-radius: 100%;
+    top: 7px;
+    left: 15px;
+}
+
+.text-blueish{
+    color: #1b6083;
+}
+
+.text-primary {
+    color: #d19100;
+}
+
+.bg-primary {
+    background-color: #d19100 !important;
+}
+
+.text-secondary {
+    color: #0C8880;
+}
+
+.bg-secondary {
+    background-color: #0C8880;
+}
+
+.button {
+    padding: 1em 2em;
+    border-radius: 100px;
+    display: inline-block;
+    text-align: center;
+    width: max-content;
+}
+
+.centerAll {
+    position: absolute;
+    margin: auto;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    height: auto;
+    width: 1200px;
+    text-align: center;
+}
+
+.homeButton {
+    background-image: url('../img/home.svg');
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 86px;
+    height: 86px;
+    display: block;
+    z-index: 100;
+}
+
+.backButton {
+    background-image: url('../img/back.svg');
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 86px;
+    height: 86px;
+    display: block;
+    z-index: 100;
+}
+
+.closeButton {
+    background-image: url('../img/close.svg');
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 86px;
+    height: 86px;
+    display: block;
+    z-index: 100;
+}
+
+.infoBox {
+    position: absolute;
+    top: 0;
+    padding: 80px 50px;
+    border-bottom: 28px solid #D5A400;
+}
+
+.borderBottom {
+    border-bottom: 28px solid #D5A400;
+}
+
+.maskImage {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 1;
+    background-color: #000;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('assets/img/lake.png');
+    clip-path: circle(93% at 100% 50%);
+}
+
+.chevron-right {
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    background-image: url('../img/chevron-right.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+.chevron-right--lg {
+    height: 50px;
+    width: 50px;
+    margin-right: -15px;
+}
+
+.chevron-right--primary {
+    background-image: url('../img/chevron-right-primary.svg') !important;
+}
+
+.chevron-right--secondary {
+    background-image: url('../img/chevron-right-secondary.svg') !important;
+    ;
+}
+
+.map {
+    top: -12px;
+    left: 0px;
+    width: 1923px;
+    height: 695px;
+}
+
+.leftAlign {
+    left: 150px;
+}
+
+.rightAlign {
+    right: 150px;
+}
+
+.bounce-enter-active {
+    animation: bounce-in .5s;
+}
+
+.bounce-leave-active {
+    animation: bounce-in .1s reverse;
+}
+
+.speechBox:before {
+    content: '';
+    position: absolute;
+    top: 100px;
+    left: -50px;
+    height: 50px;
+    width: 50px;
+    clip-path: polygon(0 55%, 100% 100%, 100% 0);
+    background-color: #fff;
+}
+
+.locationTag:before {
+    content: '';
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    height: 27px;
+    width: 40px;
+    transform: translateX(-50%);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    background-color: #fff;
+}
+
+
+@keyframes bounce-in {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+
+
+.zoom-enter-active {
+    animation: zoo-in .3s;
+}
+
+@keyframes zoo-in {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chasewater</title>
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/gsap.js"></script>
+    <script src="assets/js/idle.js"></script>
+    <link rel="stylesheet" href="assets/css/tailwind.css" />
+    <link rel="stylesheet" href="assets/css/global.css" />
+
+    <style>
+        @font-face {
+            font-family: "Baufra W01 Regular";
+            src: url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.eot");
+            /* IE9*/
+            src: url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.woff2") format("woff2"), /* chrome、firefox */
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.woff") format("woff"), /* chrome、firefox */
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+            url("assets/fonts/regular/4d66a3130e8f4215e669c8f0321fd945.svg#Baufra W01 Regular") format("svg");
+            /* iOS 4.1- */
+        }
+        
+        @font-face {
+            font-family: "Baufra W01 Bold";
+            src: url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.eot");
+            /* IE9*/
+            src: url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.woff2") format("woff2"), /* chrome、firefox */
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.woff") format("woff"), /* chrome、firefox */
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+            url("assets/fonts/bold/9eaea167a192b89127ef996b348b69e0.svg#Baufra W01 Bold") format("svg");
+            /* iOS 4.1- */
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app" class="relative seaBack">
+        <a class="backButton" href="wildlife.html"></a>
+        <a href="menu.html" class="homeButton"></a>
+        <transition name="bounce" mode="out-in">
+            <div class="w-2/5 infoBox leftAlign" :class="species[specieSelected].name !== 'intro' ? 'bg-white' : 'bg-secondary'" :key="specieSelected">
+                <p v-if="species[specieSelected].name !=='intro'" class="text-primary" v-html="species[specieSelected].name"></p>
+                <h1 class="text-8xl mb-10 bold uppercase" :class="species[specieSelected].name !== 'intro' ? 'text-primary' : 'text-white'" v-html="species[specieSelected].title"></h1>
+                <p v-html="species[specieSelected].text" :class="species[specieSelected].name !== 'intro' ? 'text-black' : 'text-white'"></p>
+                <br>
+                <p style="color: #D5A400;" v-if="species[specieSelected].name =='intro'">Choose an option below to meet some of the park’s other residents.</p>
+            </div>
+        </transition>
+        <div class="selectorButtons absolute bottom-20 leftAlign z-30">
+            <span style="width: 90%; height: 10px;" class="top-0 bottom-0 my-auto bg-white block absolute"></span>
+            <button v-for="(item, i) in species" @click="selectSpecie(i)" v-if="i > 0" :class="i === specieSelected ? 'bg-primary text-white' : 'bg-white text-primary'" class="relative rounded-full mr-20 py-1 pl-2 pr-5 align-middle">
+                <img :src="item.image" class="inline-block rounded-full h-20 w-20 ">
+                <span class="ml-6 mr-10 text">{{item.name}}</span>
+                <i class="ml-2 chevron-right chevron-right--primary inline-block fa-2x align-middle"></i>
+            </button>
+        </div>
+        <div class="maskImage" :style="{ 'background-image': 'url(' + species[specieSelected].image + ')' }">
+        </div>
+    </div>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
